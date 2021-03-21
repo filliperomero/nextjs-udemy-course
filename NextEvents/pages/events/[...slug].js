@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import useSWR from 'swr'
 
 import EventList from '../../components/Events/EventList'
@@ -29,9 +30,19 @@ const FilteredEventsPage = () => {
     }
   }, [data])
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={'A list of fitlered events.'} />
+    </Head>
+  )
+
   if (!loadedEvents.length) {
     return (
-      <p className='center'>Loading...</p>
+      <>
+        {pageHeadData}
+        <p className='center'>Loading...</p>
+      </>
     )
   }
 
@@ -40,9 +51,17 @@ const FilteredEventsPage = () => {
   const year = +filteredYear
   const month = +filteredMonth
 
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`All events for ${month}/${year}`} />
+    </Head>
+  )
+
   if (isNaN(year) || isNaN(month) || year > 2030 || year < 2020 || month < 1 || month > 12 || error) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p className='center'>Invalid filter. Please ajust your values</p>
         </ErrorAlert>
@@ -61,6 +80,7 @@ const FilteredEventsPage = () => {
   if (!filteredEvents || !filteredEvents.length) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p className='center'>No events found for the chosen filter</p>
         </ErrorAlert>
@@ -73,6 +93,7 @@ const FilteredEventsPage = () => {
 
   return (
     <>
+      {pageHeadData}
       <EventResultsTitle date={new Date(year, month - 1)} />
       <EventList items={filteredEvents} />
     </>

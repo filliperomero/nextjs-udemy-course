@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import EventList from '../../components/Events/EventList'
 import EventSearch from '../../components/Events/EventSearch'
@@ -23,6 +24,10 @@ const AllEventsPage = ({ events }) => {
 
   return (
     <>
+      <Head>
+        <title>NextJS Events</title>
+        <meta name="description" content="Find a lot of great events that allow you to evolve." />
+      </Head>
       <EventSearch onSearch={findEventsHandler}/>
       <EventList items={events} />
     </>
