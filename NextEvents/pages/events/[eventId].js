@@ -5,7 +5,7 @@ import EventLogistics from '../../components/Events/EventLogistics'
 import EventContent from '../../components/Events/EventContent'
 import ErrorAlert from '../../components/Ui/ErrorAlert'
 
-import { getEventById, getAllEvents } from '../../helpers/apiHelper'
+import { getEventById, getFeaturedEvents } from '../../helpers/apiHelper'
 
 const EventDetailPage = ({ event }) => {
   if (!event) {
@@ -34,17 +34,18 @@ export const getStaticProps = async (context) => {
   return {
     props: {
       event
-    }
+    },
+    revalidate: 60
   }
 }
 
 export const getStaticPaths = async () => {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
   const paths = events.map(event => ({ params: { eventId: event.id }}))
 
   return {
     paths,
-    fallback: false
+    fallback: 'blocking'
   }
 }
 

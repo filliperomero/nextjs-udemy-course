@@ -4,11 +4,10 @@ import EventList from '../../components/Events/EventList'
 import EventSearch from '../../components/Events/EventSearch'
 import ErrorAlert from '../../components/Ui/ErrorAlert'
 
-import { getAllEvents } from '../../dummy-data'
+import { getAllEvents } from '../../helpers/apiHelper'
 
-const AllEventsPage = () => {
+const AllEventsPage = ({ events }) => {
   const router = useRouter();
-  const events = getAllEvents();
 
   if (!events.length) {
     return (
@@ -28,6 +27,17 @@ const AllEventsPage = () => {
       <EventList items={events} />
     </>
   )
+}
+
+export const getStaticProps = async () => {
+  const events = await getAllEvents();
+
+  return {
+    props: {
+      events
+    },
+    revalidate: 60
+  }
 }
 
 export default AllEventsPage
