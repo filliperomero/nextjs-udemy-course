@@ -1,8 +1,9 @@
 import Head from 'next/head';
 
 import EventList from '../components/Events/EventList'
-import { getFeaturedEvents } from '../helpers/apiHelper';
+import NewsletterRegistration from '../components/Input/NewsletterRegistration'
 
+import { getFeaturedEvents } from '../helpers/apiHelper';
 
 const Home = ({ events }) => {
   // const featuredEvents = getFeaturedEvents();
@@ -13,6 +14,7 @@ const Home = ({ events }) => {
         <title>NextJS Events</title>
         <meta name="description" content="Find a lot of great events that allow you to evolve." />
       </Head>
+      <NewsletterRegistration />
       <EventList items={events} />
     </div>
   )
