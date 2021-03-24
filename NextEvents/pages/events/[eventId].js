@@ -5,6 +5,7 @@ import EventSummary from '../../components/Events/EventSummary'
 import EventLogistics from '../../components/Events/EventLogistics'
 import EventContent from '../../components/Events/EventContent'
 import ErrorAlert from '../../components/Ui/ErrorAlert'
+import Comments from '../../components/Input/Comments'
 
 import { getEventById, getFeaturedEvents } from '../../helpers/apiHelper'
 
@@ -28,6 +29,7 @@ const EventDetailPage = ({ event }) => {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   )
 }
