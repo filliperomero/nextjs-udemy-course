@@ -9,7 +9,7 @@ const NewComment = ({ onAddComment }) => {
   const nameInputRef = useRef();
   const commentInputRef = useRef();
 
-  function sendCommentHandler(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
@@ -37,7 +37,7 @@ const NewComment = ({ onAddComment }) => {
   }
 
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <div className={classes.row}>
         <div className={classes.control}>
           <label htmlFor='email'>Your email</label>

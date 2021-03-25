@@ -1,4 +1,6 @@
-const handler = (req, res) => {
+import { insertDocument } from '../../helpers/mongoHelper'
+
+export default async (req, res) => {
   if (req.method === 'POST') {
     const { email } = req.body;
 
@@ -8,8 +10,8 @@ const handler = (req, res) => {
       return;
     }
 
+    await insertDocument('newsletter', { email })
+
     res.status(201).json({ message: 'Signed up!' })
   }
 }
-
-export default handler;
