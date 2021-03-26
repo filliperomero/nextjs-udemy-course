@@ -5,13 +5,11 @@ export default async (req, res) => {
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
-      res.status(422).json({ message: 'Invalid email address' });
-
-      return;
+      return res.status(422).json({ message: 'Invalid email address' });
     }
 
     await insertDocument('newsletter', { email })
 
-    res.status(201).json({ message: 'Signed up!' })
+    return res.status(201).json({ message: 'Signed up!' })
   }
 }
