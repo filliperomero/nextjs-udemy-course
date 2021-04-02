@@ -1,12 +1,16 @@
+import { Provider } from 'next-auth/client'
+
 import Layout from '../components/Layout';
 
 import '../styles/globals.css';
 
 const App = ({ Component, pageProps }) => {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider session={pageProps.session}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   );
 }
 
