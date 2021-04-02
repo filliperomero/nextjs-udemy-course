@@ -37,6 +37,19 @@ export const findOneDocument = async (collection, query = {}, options = {}) => {
   }
 }
 
+export const updateOneDocument = async (collection, query = {}, data, options = {}) => {
+  const client = await connectDatabase()
+  let result;
+
+  try {
+    result = await client.db().collection(collection).updateOne(query, { $set: { ...data }}, options)
+  } finally {
+    await client.close();
+
+    return result;
+  }
+}
+
 export const findAllDocuments = async (collection, query = {}, options = {}) => {
   const client = await connectDatabase()
   let result;
